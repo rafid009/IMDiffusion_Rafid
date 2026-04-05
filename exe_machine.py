@@ -121,7 +121,7 @@ for training_epoch in range(0,1):
 
                     if args.dataset == "SMD":
                         feature_dim = 38
-                    elif args.dataset == "SMAP" or args.datset == "PSM":
+                    elif args.dataset == "SMAP" or args.dataset == "PSM":
                         feature_dim = 25
                     elif args.dataset == "MSL":
                         feature_dim = 55
