@@ -203,8 +203,8 @@ def get_mask(observed_mask, mask_ratio):
 
     return mask
 
-def get_dataloader(train_path, test_path, label_path,batch_size = 32,window_split=1,split=4,mask_ratio=0.5):
-    train_data = TrainData(train_path,test_path,split=split,mask_ratio=mask_ratio)
+def get_dataloader(train_path, test_path, label_path,batch_size = 32,window_length=60,window_split=1,split=4,mask_ratio=0.5):
+    train_data = TrainData(train_path,test_path, window_length=window_length, split=split,mask_ratio=mask_ratio)
     train_data, valid_data = random_split(
         train_data, [len(train_data) - int(0.05 * len(train_data)) , int(0.05 * len(train_data)) ]
     )
@@ -218,8 +218,8 @@ def get_dataloader(train_path, test_path, label_path,batch_size = 32,window_spli
         mask_list.append(get_mask(observed_mask,mask_ratio=mask_ratio))
 
 
-    test_data_strategy_1 = TestData(test_path, label_path, train_path,window_split=window_split,strategy=0,split=split,mask_list=mask_list)
-    test_data_strategy_2 = TestData(test_path, label_path, train_path, window_split=window_split, strategy=1,split=split,mask_list=mask_list)
+    test_data_strategy_1 = TestData(test_path, label_path, train_path, window_length=window_length, window_split=window_split,strategy=0,split=split,mask_list=mask_list)
+    test_data_strategy_2 = TestData(test_path, label_path, train_path, window_length=window_length, window_split=window_split, strategy=1,split=split,mask_list=mask_list)
 
     train_loader = DataLoader(train_data,batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(valid_data,batch_size=batch_size,shuffle=True)

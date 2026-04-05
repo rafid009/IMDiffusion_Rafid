@@ -20,6 +20,7 @@ parser.add_argument("--modelfolder", type=str, default="")
 parser.add_argument("--ratio",type=float,default=0.7)
 parser.add_argument("--epochs",type=int,default=100)
 parser.add_argument("--dataset",type=str,default="SMD")
+parser.add_argument("--window_length",type=int,default=60)
 args = parser.parse_args()
 
 
@@ -110,7 +111,8 @@ for training_epoch in range(0,1):
                         test_data_path,
                         label_data_path,
                         batch_size=12,
-                        split=split
+                        split=split,
+                        window_length=
                     )
                     print("train path is")
                     print(train_data_path)
