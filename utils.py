@@ -57,20 +57,21 @@ def train(
             lr_scheduler.step()
 
         # if valid_loader is not None and (epoch_no + 1) % valid_epoch_interval == 0:
-        mse_score = validation(model, valid_loader ,nsample=1)
-        if mse_score < best_mse_score:
-            stop_counter = 0
-            best_mse_score = mse_score
-            print("best mse score update")
-            print("now best is")
-            print(best_mse_score)
-            output_path = foldername + f"/best-model.pth"
-            torch.save(model.state_dict(), output_path)
-        else:
-            stop_counter += 1
+        if epoch_no % 5 == 0:
+            mse_score = validation(model, valid_loader ,nsample=1)
+            if mse_score < best_mse_score:
+                stop_counter = 0
+                best_mse_score = mse_score
+                print("best mse score update")
+                print("now best is")
+                print(best_mse_score)
+                output_path = foldername + f"/best-model.pth"
+                torch.save(model.state_dict(), output_path)
+            else:
+                stop_counter += 1
 
-        if stop_counter > 5:
-            break
+        # if stop_counter > 5:
+        #     break
 
 def quantile_loss(target, forecast, q: float, eval_points) -> float:
     return 2 * torch.sum(
@@ -125,7 +126,15 @@ def validation(model, valid_loader, nsample=20, scaler=1):
                 mae_current = (
                     torch.abs((samples_median.values - c_target) * eval_points)
                 ) * scaler
-
+                
+                if mse_current.sum().item().isnan():
+                    print("mse current is nan!")
+                    print("samples median is")
+                    print(samples_median.values)
+                    print("c target is")
+                    print(c_target)
+                    print("eval points is")
+                    print(eval_points)
                 mse_total += mse_current.sum().item()
                 mae_total += mae_current.sum().item()
                 evalpoints_total += eval_points.sum().item()
