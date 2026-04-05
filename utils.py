@@ -127,7 +127,7 @@ def validation(model, valid_loader, nsample=20, scaler=1):
                     torch.abs((samples_median.values - c_target) * eval_points)
                 ) * scaler
                 
-                if mse_current.sum().item().isnan():
+                if mse_current.isnan().any():
                     print("mse current is nan!")
                     print("samples median is")
                     print(samples_median.values)
