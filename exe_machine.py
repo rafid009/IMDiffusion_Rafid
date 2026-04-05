@@ -112,7 +112,7 @@ for training_epoch in range(0,1):
                         label_data_path,
                         batch_size=12,
                         split=split,
-                        window_length=
+                        window_length=args.window_length
                     )
                     print("train path is")
                     print(train_data_path)
