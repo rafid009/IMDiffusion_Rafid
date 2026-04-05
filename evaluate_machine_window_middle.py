@@ -11,7 +11,7 @@ from utils import train,  window_trick_evaluate_middle
 
 parser = argparse.ArgumentParser(description="CSDI")
 parser.add_argument("--config", type=str, default="base.yaml")
-parser.add_argument('--device', default='cuda:3', help='Device for Attack')
+parser.add_argument('--device', default='cuda:0', help='Device for Attack')
 parser.add_argument("--seed", type=int, default=1)
 parser.add_argument("--testmissingratio", type=float, default=0.1)
 parser.add_argument(
@@ -109,6 +109,8 @@ for iteration in os.listdir("train_result"):
             feature_dim = 19
         elif args.dataset == "SWaT":
             feature_dim = 45
+        elif args.dataset == "Synth":
+            feature_dim = 4    
 
         model = CSDI_Physio(config, args.device, target_dim=feature_dim, ratio=args.ratio).to(args.device)
         base_folder = f"train_result/{iteration}/{subset_name}"

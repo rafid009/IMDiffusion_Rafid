@@ -47,6 +47,10 @@ elif args.dataset == "GCP":
             train_data_path_list.append("data/Machine/" + file)
             test_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test.pkl"))
             label_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test_label.pkl"))
+elif args.dataset == "Synth":
+    train_data_path_list.append("data/synth/X_train.npy")
+    test_data_path_list.append("data/synth/X_test.npy")
+    label_data_path_list.append("data/synth/Y_test.npy")
 else: # for dataset with only one subset
     data_set_number = [args.dataset]
     for data_set_id in data_set_number:
@@ -69,7 +73,7 @@ except:
     pass
 
 
-for training_epoch in range(0,6):
+for training_epoch in range(0,1):
     print(f"begin to train for training_epoch {training_epoch} ...")
     try:
         os.mkdir(f"train_result/save{training_epoch}")
@@ -124,6 +128,8 @@ for training_epoch in range(0,6):
 
                     elif args.dataset == "GCP":
                         feature_dim = 19
+                    elif args.dataset == "Synth":
+                        feature_dim = 4
 
 
                     model = CSDI_Physio(config, args.device,target_dim=feature_dim,ratio = args.ratio).to(args.device)

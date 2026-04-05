@@ -16,15 +16,17 @@ except:
 class TrainData(Dataset):
 
     def __init__(self, file_path, test_path, window_length=100,split=4,mask_ratio=0.5):
-        self.data = pickle.load(
-            open(file_path, "rb")
-        )
+        self.data = np.load(file_path)
+        # pickle.load(
+        #     open(file_path, "rb")
+        # )
         length = self.data.shape[0]
 
         self.mask_ratio = mask_ratio
-        self.test_data = pickle.load(
-            open(test_path, "rb")
-        )
+        self.test_data = np.load(test_path)
+        # pickle.load(
+        #     open(test_path, "rb")
+        # )
         self.data = np.concatenate([self.data, self.test_data])
         self.data = torch.Tensor(self.data)
         # 为了避免高斯噪声造成的影响过大，此处将原有的数值全部乘以20
@@ -87,22 +89,26 @@ class TestData(Dataset):
     def __init__(self, file_path,label_path, train_path,window_length=100, get_label=False,window_split=1,strategy = 1,split=4,mask_list = []):
         self.strategy = strategy
         self.get_label = get_label
-        self.data = pickle.load(
-            open(file_path, "rb")
-        )
+        self.data = np.load(file_path)
+        
+        # pickle.load(
+        #     open(file_path, "rb")
+        # )
         self.mask_list = mask_list
         length = self.data.shape[0]
         try:
-            self.train_data  = pickle.load(
-                open(train_path, "rb")
-            )
+            self.train_data  = np.load(train_path)
+            # pickle.load(
+            #     open(train_path, "rb")
+            # )
         except:
             print("train data get wrong !")
 
         try:
-            self.label = pickle.load(
-                open(label_path,"rb")
-            )
+            self.label = np.load(label_path)
+            # pickle.load(
+            #     open(label_path,"rb")
+            # )
         except:
             print("label get wrong !")
         self.label = torch.LongTensor(self.label)
