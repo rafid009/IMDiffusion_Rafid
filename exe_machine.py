@@ -99,7 +99,8 @@ for training_epoch in range(0,1):
                         unconditional) + "_split:" + str(
                         split) + "_diffusion_step:" + str(diffusion_step) + "/"
                     print('model folder:', foldername)
-                    os.makedirs(foldername)
+                    if not os.path.isdir(foldername):
+                        os.makedirs(foldername)
                     with open(foldername + "config.json", "w") as f:
                         json.dump(config, f, indent=4)
 
