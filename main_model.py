@@ -175,7 +175,14 @@ class CSDI_base(nn.Module):
                     noisy_target = ((1 - cond_mask) * current_sample).unsqueeze(1)
                     diff_input = torch.cat([cond_obs, noisy_target], dim=1)  # (B,2,K,L)
                 predicted = self.diffmodel(diff_input, side_info, torch.tensor([t]).to(self.device),strategy_type)
-
+                if predicted.isnan().any():
+                    print("predicted is nan!")
+                    print("diff input is")
+                    print(diff_input)
+                    print("side info is")
+                    print(side_info)
+                    print("t is")
+                    print(t)
                 coeff1 = 1 / self.alpha_hat[t] ** 0.5
                 # print("alpha_hat t is")
                 # print(self.alpha_hat[t])
