@@ -177,12 +177,15 @@ class CSDI_base(nn.Module):
                 predicted = self.diffmodel(diff_input, side_info, torch.tensor([t]).to(self.device),strategy_type)
                 if predicted.isnan().any():
                     print("predicted is nan!")
+                    print("t is")
+                    print(t)
                     print("diff input is")
+                    if diff_input.isnan().any():
+                        print("diff input has nan!")
                     print(diff_input)
                     print("side info is")
                     print(side_info)
-                    print("t is")
-                    print(t)
+                    
                 coeff1 = 1 / self.alpha_hat[t] ** 0.5
                 # print("alpha_hat t is")
                 # print(self.alpha_hat[t])
