@@ -80,7 +80,12 @@ class diff_CSDI(nn.Module):
         B, inputdim, K, L = x.shape
 
         x = x.reshape(B, inputdim, K * L)
+        x_prev = x
         x = self.input_projection(x)
+        if x.isnan().any():
+            print("input projection is nan!")
+            print("x prev is")
+            print(x_prev)
         x = F.relu(x)
         x = x.reshape(B, self.channels, K, L)
 
@@ -93,14 +98,45 @@ class diff_CSDI(nn.Module):
         # print(strategy_emb.shape)
         skip = []
         for layer in self.residual_layers:
+            x_prev = x
             x, skip_connection = layer(x, cond_info, diffusion_emb,strategy_emb)
+            if x.isnan().any():
+                print("residual block output is nan!")
+                print("x prev is")
+                print(x_prev)
+                print("cond info is")
+                print(cond_info)
+                print("diffusion emb is")
+                print(diffusion_emb)
+                print("strategy emb is")
+                print(strategy_emb)
+            if skip_connection.isnan().any():
+                print("skip connection is nan!")
+                print("x prev is")
+                print(x_prev)
+                print("cond info is")
+                print(cond_info)
+                print("diffusion emb is")
+                print(diffusion_emb)
+                print("strategy emb is")
+                print(strategy_emb)
             skip.append(skip_connection)
 
         x = torch.sum(torch.stack(skip), dim=0) / math.sqrt(len(self.residual_layers))
         x = x.reshape(B, self.channels, K * L)
+        x_prev = x
         x = self.output_projection1(x)  # (B,channel,K*L)
+        if x.isnan().any():
+            print("output projection 1 is nan!")
+            print("x prev is")
+            print(x_prev)
         x = F.relu(x)
+        x_prev = x
         x = self.output_projection2(x)  # (B,1,K*L)
+        if x.isnan().any():
+            print("output projection 2 is nan!")
+            print("x prev is")
+            print(x_prev)
         x = x.reshape(B, K, L)
         return x
 
