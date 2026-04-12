@@ -105,6 +105,7 @@ class diff_CSDI(nn.Module):
                 print("residual block output is nan!")
                 print("x prev is")
                 print(x_prev)
+                print("is x_prev nan?", x_prev.isnan().any())
                 print("cond info is")
                 print(cond_info)
                 print("diffusion emb is")
@@ -115,6 +116,7 @@ class diff_CSDI(nn.Module):
                 print("skip connection is nan!")
                 print("x prev is")
                 print(x_prev)
+                print("is x_prev nan?", x_prev.isnan().any())
                 print("cond info is")
                 print(cond_info)
                 print("diffusion emb is")
@@ -131,6 +133,7 @@ class diff_CSDI(nn.Module):
             print("output projection 1 is nan!")
             print("x prev is")
             print(x_prev)
+            print("is x_prev nan?", x_prev.isnan().any())
         x = F.relu(x)
         x_prev = x
         x = self.output_projection2(x)  # (B,1,K*L)
@@ -138,6 +141,7 @@ class diff_CSDI(nn.Module):
             print("output projection 2 is nan!")
             print("x prev is")
             print(x_prev)
+            print("is x_prev nan?", x_prev.isnan().any())
         x = x.reshape(B, K, L)
         return x
 
