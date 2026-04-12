@@ -86,6 +86,7 @@ class diff_CSDI(nn.Module):
             print("input projection is nan!")
             print("x prev is")
             print(x_prev)
+            print("is x_prev nan?", x_prev.isnan().any())
         x = F.relu(x)
         x = x.reshape(B, self.channels, K, L)
 
