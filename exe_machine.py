@@ -52,6 +52,10 @@ elif args.dataset == "Synth":
     train_data_path_list.append("data/synth/X_train.npy")
     test_data_path_list.append("data/synth/X_test.npy")
     label_data_path_list.append("data/synth/Y_test.npy")
+elif args.dataset == 'SWaT':
+    train_data_path_list.append("data/swat/SWaT_minute_segments_normal.npy")
+    test_data_path_list.append("data/swat/SWaT_minute_segments_anomaly.npy")
+    label_data_path_list.append("data/swat/SWaT_minute_segments_anomaly_labels.npy")
 else: # for dataset with only one subset
     data_set_number = [args.dataset]
     for data_set_id in data_set_number:
@@ -127,7 +131,7 @@ for training_epoch in range(0,1):
                     elif args.dataset == "MSL":
                         feature_dim = 55
                     elif args.dataset == "SWaT":
-                        feature_dim = 45
+                        feature_dim = 51
 
                     elif args.dataset == "GCP":
                         feature_dim = 19
