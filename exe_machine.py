@@ -29,7 +29,7 @@ args = parser.parse_args()
 train_data_path_list = []
 test_data_path_list = []
 label_data_path_list = []
-
+dataset_name = ""
 if args.dataset == "SMD":
     data_set_number = ["3-4",'3-5',"3-10","3-11","1-5","1-8","2-4"]
     data_set_number += ["1-1","1-2","1-3","1-4","1-5","1-6","1-7","1-8"]
@@ -52,10 +52,12 @@ elif args.dataset == "Synth":
     train_data_path_list.append("data/synth/X_train.npy")
     test_data_path_list.append("data/synth/X_test.npy")
     label_data_path_list.append("data/synth/Y_test.npy")
+    dataset_name = "synth"
 elif args.dataset == 'SWaT':
     train_data_path_list.append("data/swat/SWaT_minute_segments_normal.npy")
     test_data_path_list.append("data/swat/SWaT_minute_segments_anomaly.npy")
     label_data_path_list.append("data/swat/SWaT_minute_segments_anomaly_labels.npy")
+    dataset_name = "swat"
 else: # for dataset with only one subset
     data_set_number = [args.dataset]
     for data_set_id in data_set_number:
@@ -99,7 +101,7 @@ for training_epoch in range(0,1):
                     config["diffusion"]["num_steps"] = diffusion_step
                     print(json.dumps(config, indent=4))
 
-                    foldername = f"./train_result/save{training_epoch}/" + f"{train_data_path.replace('_train.pkl', '').replace('data/Machine/', '')}" + "_unconditional:" + str(
+                    foldername = f"./train_result/save{training_epoch}/" + f"{dataset_name if dataset_name != '' else train_data_path.replace('_train.pkl', '').replace('data/Machine/', '')}" + "_unconditional:" + str(
                         unconditional) + "_split:" + str(
                         split) + "_diffusion_step:" + str(diffusion_step) + "/"
                     print('model folder:', foldername)
