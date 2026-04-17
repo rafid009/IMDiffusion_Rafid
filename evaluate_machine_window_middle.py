@@ -72,10 +72,16 @@ for iteration in os.listdir("train_result"):
         label_data_path_list = []
 
 
-        data_file = f"{data_id}_train.pkl"
-        train_data_path_list.append("data/Machine/" + data_file)
-        test_data_path_list.append("data/Machine/" + data_file.replace("_train.pkl","_test.pkl"))
-        label_data_path_list.append("data/Machine/" + data_file.replace("_train.pkl","_test_label.pkl"))
+        if args.dataset == "SWaT":
+            train_data_path_list.append("data/swat/SWaT_minute_segments_normal.npy")
+            test_data_path_list.append("data/swat/SWaT_minute_segments_anomaly.npy")
+            label_data_path_list.append("data/swat/SWaT_minute_segments_anomaly_labels.npy")
+            dataset_name = "swat"
+        else:
+            data_file = f"{data_id}_train.pkl"
+            train_data_path_list.append("data/Machine/" + data_file)
+            test_data_path_list.append("data/Machine/" + data_file.replace("_train.pkl","_test.pkl"))
+            label_data_path_list.append("data/Machine/" + data_file.replace("_train.pkl","_test_label.pkl"))
 
 
         # epoch = file.split("-")[0]
@@ -108,7 +114,7 @@ for iteration in os.listdir("train_result"):
         elif args.dataset == "GCP":
             feature_dim = 19
         elif args.dataset == "SWaT":
-            feature_dim = 45
+            feature_dim = 51
         elif args.dataset == "Synth":
             feature_dim = 4    
 
