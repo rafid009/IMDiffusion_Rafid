@@ -26,6 +26,7 @@ parser.add_argument("--diffusion_step",type=int,default=50)
 parser.add_argument("--machine_number",type=int,default=1)
 parser.add_argument("--file",type=str)
 parser.add_argument('--dataset',type=str,default="SMD")
+parser.add_argument("--window_length",type=int,default=60)
 args = parser.parse_args()
 
 
