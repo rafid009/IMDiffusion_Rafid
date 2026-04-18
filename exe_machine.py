@@ -101,7 +101,7 @@ for training_epoch in range(0,1):
                     config["diffusion"]["num_steps"] = diffusion_step
                     print(json.dumps(config, indent=4))
 
-                    foldername = f"./train_result/save{training_epoch}/" + f"{dataset_name if dataset_name != '' else train_data_path.replace('_train.pkl', '').replace('data/Machine/', '')}" + "_unconditional:" + str(
+                    foldername = f"./train_result_{dataset_name}/save{training_epoch}/" + f"{dataset_name if dataset_name != '' else train_data_path.replace('_train.pkl', '').replace('data/Machine/', '')}" + "_unconditional:" + str(
                         unconditional) + "_split:" + str(
                         split) + "_diffusion_step:" + str(diffusion_step) + "/"
                     print('model folder:', foldername)
