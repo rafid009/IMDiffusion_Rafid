@@ -59,7 +59,7 @@ for iteration in os.listdir(f"train_result_{dataset_name}"):
     except:
         pass
 
-    for subset_name in os.listdir(f"train_result_{dataset_name} /{iteration}/"):
+    for subset_name in os.listdir(f"train_result_{dataset_name}/{iteration}/"):
 
         data_id = subset_name.split("_unconditional")[0]
 
