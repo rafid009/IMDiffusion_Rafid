@@ -43,20 +43,23 @@ train_data_path_list = []
 test_data_path_list = []
 label_data_path_list = []
 
-
+if args.dataset == "SWaT":
+    dataset_name = "swat"
+elif args.dataset == "Synth":
+    dataset_name = "synth"
 try:
-    os.mkdir("window_result")
+    os.mkdir(f"window_result_{dataset_name}")
 except:
     pass
 
-for iteration in os.listdir("train_result"):
+for iteration in os.listdir(f"train_result_{dataset_name}"):
 
     try:
-        os.mkdir(f"window_result/{iteration}")
+        os.mkdir(f"window_result_{dataset_name}/{iteration}")
     except:
         pass
 
-    for subset_name in os.listdir(f"train_result/{iteration}/"):
+    for subset_name in os.listdir(f"train_result_{dataset_name} /{iteration}/"):
 
         data_id = subset_name.split("_unconditional")[0]
 
@@ -77,7 +80,10 @@ for iteration in os.listdir("train_result"):
             train_data_path_list.append("data/swat/SWaT_minute_segments_normal.npy")
             test_data_path_list.append("data/swat/SWaT_minute_segments_anomaly.npy")
             label_data_path_list.append("data/swat/SWaT_minute_segments_anomaly_labels.npy")
-            dataset_name = "swat"
+        elif args.dataset == "Synth":
+            train_data_path_list.append("data/synth/X_train.npy")
+            test_data_path_list.append("data/synth/X_test.npy")
+            label_data_path_list.append("data/synth/Y_test.npy")
         else:
             data_file = f"{data_id}_train.pkl"
             train_data_path_list.append("data/Machine/" + data_file)
@@ -120,7 +126,7 @@ for iteration in os.listdir("train_result"):
             feature_dim = 4    
 
         model = CSDI_Physio(config, args.device, target_dim=feature_dim, ratio=args.ratio).to(args.device)
-        base_folder = f"train_result/{iteration}/{subset_name}"
+        base_folder = f"train_result_{dataset_name}/{iteration}/{subset_name}"
 
         model.load_state_dict(torch.load(f"{base_folder}/best-model.pth",map_location=args.device))
 
@@ -128,11 +134,11 @@ for iteration in os.listdir("train_result"):
         print(base_folder)
 
         try:
-            os.mkdir(f"window_result/{iteration}/{diffusion_step}")
+            os.mkdir(f"window_result_{dataset_name}/{iteration}/{diffusion_step}")
         except:
             pass
 
-        target_folder = f"window_result/{iteration}/{diffusion_step}/{subset_name}"
+        target_folder = f"window_result_{dataset_name}/{iteration}/{diffusion_step}/{subset_name}"
 
         try:
             os.mkdir(target_folder)

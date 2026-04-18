@@ -30,7 +30,7 @@ def train(
     best_valid_loss = 1e10
     # for epoch_no in range(config["epochs"]):
     # !for test!
-    for epoch_no in range(0,500):
+    for epoch_no in range(0,config["epochs"]):
 
         avg_loss = 0
         model.train()
