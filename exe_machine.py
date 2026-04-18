@@ -83,7 +83,7 @@ except:
 for training_epoch in range(0,1):
     print(f"begin to train for training_epoch {training_epoch} ...")
     try:
-        os.mkdir(f"train_result/save{training_epoch}")
+        os.mkdir(f"train_result_{dataset_name}/save{training_epoch}")
     except:
         pass
     for diffusion_step in diffusion_step_list:
