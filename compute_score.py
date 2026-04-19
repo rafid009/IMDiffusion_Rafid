@@ -304,10 +304,15 @@ if __name__ == "__main__":
         best_f, best_proper, best_infor, threshold_infor_dict = compute_one_subset_one_strategy(
             dataset_name, subset_name, args.compute_sum, args.compute_abs
         )
+        if not os.path.isdir(f"score/{dataset_name}/best_infor/"):
+            os.makedirs(f"score/{dataset_name}/best_infor/", exist_ok=True)
         json.dump(
             best_infor,
             open(f"score/{dataset_name}/best_infor/{subset_name}_{args.compute_sum}_{args.compute_abs}.json", "w")
         )
+
+        if not os.path.isdir(f"score/{dataset_name}/infor_dict/"):
+            os.makedirs(f"score/{dataset_name}/infor_dict/", exist_ok=True)
 
         json.dump(
             threshold_infor_dict,
