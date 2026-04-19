@@ -60,7 +60,8 @@ for iteration in os.listdir(f"train_result_{dataset_name}"):
         pass
 
     for subset_name in os.listdir(f"train_result_{dataset_name}/{iteration}/"):
-        print(f"subset name is {subset_name}")
+        folder_name = f'train_result_{dataset_name}/{iteration}/'
+        print(f"subset name is {subset_name}\n lis is: {os.listdir(folder_name)}")
         if 'synth' not in subset_name:
             continue
         data_id = subset_name.split("_unconditional")[0]
