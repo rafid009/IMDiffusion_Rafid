@@ -180,6 +180,7 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
         dname = "swat"
     else:
         dname = dataset_name
+    subset_name = dname
     for save_file in os.listdir(f"window_result_{dname}"):
         if "save" in save_file:
             pass
