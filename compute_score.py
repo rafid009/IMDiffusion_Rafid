@@ -308,7 +308,8 @@ if __name__ == "__main__":
             os.makedirs(f"score/{dataset_name}/best_infor/", exist_ok=True)
         json.dump(
             best_infor,
-            open(f"score/{dataset_name}/best_infor/{subset_name}_{args.compute_sum}_{args.compute_abs}.json", "w")
+            open(f"score/{dataset_name}/best_infor/{subset_name}_{args.compute_sum}_{args.compute_abs}.json", "w"),
+            indent=4
         )
 
         if not os.path.isdir(f"score/{dataset_name}/infor_dict/"):
@@ -316,7 +317,8 @@ if __name__ == "__main__":
 
         json.dump(
             threshold_infor_dict,
-            open(f"score/{dataset_name}/infor_dict/{subset_name}_{args.compute_sum}_{args.compute_abs}.json", "w")
+            open(f"score/{dataset_name}/infor_dict/{subset_name}_{args.compute_sum}_{args.compute_abs}.json", "w"),
+            indent=4
         )
         total_infor_csv.writerow(
             [subset_name, args.compute_sum, args.compute_abs, best_f, best_proper]
