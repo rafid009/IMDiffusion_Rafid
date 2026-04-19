@@ -145,7 +145,7 @@ for iteration in os.listdir(f"train_result_{dataset_name}"):
         try:
             os.mkdir(target_folder)
         except:
-            continue
+            pass
 
         for temp_i in range(0,1):
             window_trick_evaluate_middle(model, train_error_loader_list, test_loader_list, nsample=1, scaler=1,
