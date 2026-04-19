@@ -191,7 +191,7 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
         except:
             continue
         for subdata_name in os.listdir(f"window_result_{dname}/{save_file}/50"):
-            print(f"subdata name is {subdata_name}")
+            print(f"subdata name is {subdata_name} and subset name is {subset_name}")
             if subset_name + "_" in subdata_name:
                 pass
             else:
