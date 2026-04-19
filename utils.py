@@ -618,7 +618,7 @@ def window_trick_evaluate_middle(model, test_loader1, test_loader2, nsample=20, 
                 # if np.sqrt(mse_total / evalpoints_total) > 20:
                 #     residual = ((samples_median.values - c_target)) ** 2 * (scaler ** 2)
                 #     print(residual)
-
+            print("final construction error saved")
             with open(
                 foldername + f"/{epoch_number}-generated_outputs_nsample" + str(nsample) + f"{name}_stop_number_{stop_number}.pk", "wb"
             ) as f:
