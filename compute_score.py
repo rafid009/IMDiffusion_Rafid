@@ -115,9 +115,9 @@ def compute_best_threshold_for_average_adjust_f(residual_list, labels):
         # print(infor_list)
         infor_tensor = torch.Tensor(infor_list)
         average_infor_tensor = infor_tensor.mean(0)
-        average_adjust_f = average_infor_tensor[0].item()
-        avg_adjust_p = average_infor_tensor[1].item()
-        avg_adjust_r = average_infor_tensor[2].item()
+        average_adjust_f = average_infor_tensor[3].item()
+        avg_adjust_p = average_infor_tensor[4].item()
+        avg_adjust_r = average_infor_tensor[5].item()
         if average_adjust_f > best_f:
             best_f = average_adjust_f
             print(f"best f update is {best_f}")
