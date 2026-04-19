@@ -6,6 +6,7 @@ import csv
 from tqdm import tqdm
 import argparse
 import copy
+import numpy as np
 
 
 def prediction_adjust(prediction, labels):
@@ -199,12 +200,21 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
             for pkl_path in os.listdir(base_path):
                 if ".pk" in pkl_path:
                     # 记得每次都要读取，否则它会按照地址进行修改
-                    labels = pickle.load(
-                        open(f"data/Machine/{subset_name}_test_label.pkl", "rb")
-                    )
-                    ground_truth = pickle.load(
-                        open(f"data/Machine/{subset_name}_test.pkl", "rb")
-                    )
+                    if dataset_name == "SWaT":
+                        print("begin to load swat data ...")
+                        labels = np.load("data/swat/SWaT_minute_segments_anomaly_labels.npy").reshape(-1)
+                        ground_truth = np.load("data/swat/SWaT_minute_segments_anomaly.npy")
+                    elif dataset_name == "Synth":
+                        print("begin to load synth data ...")
+                        labels = np.load("data/synth/Y_test.npy").reshape(-1)
+                        ground_truth = np.load("data/synth/X_test.npy")
+                    else:
+                        labels = pickle.load(
+                            open(f"data/Machine/{subset_name}_test_label.pkl", "rb")
+                        )
+                        ground_truth = pickle.load(
+                            open(f"data/Machine/{subset_name}_test.pkl", "rb")
+                        )
 
                     pkl_file = pickle.load(
                         open(f"{base_path}/{pkl_path}", 'rb')
