@@ -198,6 +198,7 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
                 continue
 
             base_path = f"window_result_{dname}/{save_file}/50/{subdata_name}"
+            print(f"base path is {base_path} and path list is {os.listdir(base_path)}")
             for pkl_path in os.listdir(base_path):
                 if ".pk" in pkl_path:
                     # 记得每次都要读取，否则它会按照地址进行修改
