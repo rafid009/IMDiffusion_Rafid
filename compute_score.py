@@ -103,7 +103,7 @@ def compute_best_threshold_for_average_adjust_f(residual_list, labels):
     threshold_infor_dict = {}
     best_f = -1
     print("begin to search ...")
-    precision, recall, _ = precision_recall_curve(labels, residual_list)
+    precision, recall, _ = precision_recall_curve(labels, residual_list[0].reshape(-1))
     pr_auc = auc(recall, precision)
     print(f"Precision-Recall AUC: {pr_auc:.4f}")
     for i in tqdm(range(1, 80)):
