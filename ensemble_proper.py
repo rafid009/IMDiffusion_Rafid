@@ -336,7 +336,7 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
                                                                                             last_step_threshold,
                                                                                             compute_abs, compute_sum,machine_number=machine_number)
                 result = list(result)
-                print(f"Best F1 score: {result[0]}\nPrecision: {result[1]}\nRecall: {result[2]}")
+                print(f"Best Precision: {result[0]}\Recall: {result[1]}\nF1 score: {result[2]}")
                 iter_result_list.append(result)
                 # csv_writer.writerow([compute_abs, compute_sum] + result)
                 # csv_writer.writerow(same_list + [same_std])
