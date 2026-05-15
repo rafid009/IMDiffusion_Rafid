@@ -389,16 +389,21 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
 
 
     else:
-
+        if data_id == "Synth":
+            dataset_name = "synth"
+        elif data_id == "SWaT":
+            dataset_name = "swat"
+        else:
+            dataset_name = data_id
         iter_result_list = []
         pkl_path_list = []
-        for save_file in os.listdir(f"window_result_{data_id}/"):
+        for save_file in os.listdir(f"window_result_{dataset_name}/"):
             if "save" not in save_file:
                 continue
-            for data_file in os.listdir(f"window_result_{data_id}/{save_file}/50/"):
+            for data_file in os.listdir(f"window_result_{dataset_name}/{save_file}/50/"):
                 if data_id not in data_file or "unconditional" not in data_file:
                     continue
-                base_path = f"window_result_{data_id}/{save_file}/50/{data_file}"
+                base_path = f"window_result_{dataset_name}/{save_file}/50/{data_file}"
                 # print(base_path)
                 for pkl_path in os.listdir(base_path):
                     if ".pk" in pkl_path:
