@@ -276,6 +276,9 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
     if data_id == "SWaT":
         compute_abs = True
         compute_sum = True
+    if data_id == "Synth":
+        args.compute_abs = True
+        args.compute_sum = True
 
     if data_id == "SMD" or data_id == "GCP":
         compute_abs = True
