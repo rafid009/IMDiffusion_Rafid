@@ -392,13 +392,13 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
 
         iter_result_list = []
         pkl_path_list = []
-        for save_file in os.listdir(f"window_result/"):
+        for save_file in os.listdir(f"window_result_{data_id}/"):
             if "save" not in save_file:
                 continue
-            for data_file in os.listdir(f"window_result/{save_file}/50/"):
+            for data_file in os.listdir(f"window_result_{data_id}/{save_file}/50/"):
                 if data_id not in data_file or "unconditional" not in data_file:
                     continue
-                base_path = f"window_result/{save_file}/50/{data_file}"
+                base_path = f"window_result_{data_id}/{save_file}/50/{data_file}"
                 # print(base_path)
                 for pkl_path in os.listdir(base_path):
                     if ".pk" in pkl_path:
