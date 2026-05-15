@@ -238,8 +238,9 @@ def ensemble(pkl_path, data_id, ensemble_strategy_list = [],last_step_threshold 
         add_value = sum(add_list) / len(add_list)
 
 
-        adjust_prediction = prediction_adjust(prediction,label)
-        p,r,f = compute_f(adjust_prediction,label)
+        # adjust_prediction = prediction_adjust(prediction,label)
+        # p,r,f = compute_f(adjust_prediction,label)
+        p,r,f = compute_f(prediction,label)
 
 
 
