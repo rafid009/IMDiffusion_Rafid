@@ -415,6 +415,7 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
         for pkl_path in pkl_path_list:
             result, same_list, same_std, same_anomaly_list, same_anomaly_std = ensemble(pkl_path,data_id,ensemble_strategy_list,last_step_threshold,compute_abs,compute_sum)
             result = list(result)
+            print(f"Best F1 score: {result[0]}\nPrecision: {result[1]}\nRecall: {result[2]}")
             iter_result_list.append(result)
             csv_writer.writerow([compute_abs,compute_sum] + result)
             csv_writer.writerow(same_list + [same_std])
@@ -423,18 +424,18 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
         iter_result_tensor = torch.Tensor(iter_result_list)
         average = iter_result_tensor.mean(0).tolist()
         # f_std = torch.std(iter_result_tensor[:,0])
-        csv_writer.writerow(['average'])
-        csv_writer.writerow(
-            ['p','r','f1','add']
-        )
-        csv_writer.writerow(average )
-        csv_writer.writerow(['std'])
-        csv_writer.writerow(
-            ['p', 'r', 'f1', 'add']
-        )
-        csv_writer.writerow(
-            iter_result_tensor.std(0).tolist()
-        )
+        # csv_writer.writerow(['average'])
+        # csv_writer.writerow(
+        #     ['p','r','f1','add']
+        # )
+        # csv_writer.writerow(average )
+        # csv_writer.writerow(['std'])
+        # csv_writer.writerow(
+        #     ['p', 'r', 'f1', 'add']
+        # )
+        # csv_writer.writerow(
+        #     iter_result_tensor.std(0).tolist()
+        # )
 
 
 def compute_one_data(data_id):
