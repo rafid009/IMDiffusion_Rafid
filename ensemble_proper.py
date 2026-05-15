@@ -421,7 +421,7 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
             csv_writer.writerow([])
         iter_result_tensor = torch.Tensor(iter_result_list)
         average = iter_result_tensor.mean(0).tolist()
-        f_std = torch.std(iter_result_tensor[:,0])
+        # f_std = torch.std(iter_result_tensor[:,0])
         csv_writer.writerow(['average'])
         csv_writer.writerow(
             ['p','r','f1','add']
