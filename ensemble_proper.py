@@ -5,6 +5,7 @@ import csv
 from tqdm import tqdm
 import argparse
 from pathlib import Path
+import numpy as np
 
 def prediction_adjust(prediction, labels):
     labels = labels[:len(prediction)]
@@ -130,6 +131,12 @@ def merge(pkl_path,data_id,machine_number = ""):
         origin_data = pickle.load(
             open(f"data/Machine/{machine_number}_test.pkl", "rb")
         )
+    elif data_id == "Synth":
+        label = np.load("data/synth/Y_test.npy")
+        origin_data = np.load("data/synth/X_test.npy")
+    elif data_id == "SWaT":
+        label = np.load("data/swat/SWaT_minute_segments_anomaly_labels.npy")
+        origin_data = np.load("data/swat/SWaT_minute_segments_anomaly.npy")
     else:
         label = pickle.load(
             open(f"data/Machine/{data_id}_test_label.pkl", "rb")
