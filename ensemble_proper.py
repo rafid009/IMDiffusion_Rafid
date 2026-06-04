@@ -291,7 +291,7 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
         compute_abs = True
         compute_sum = False
 
-    if data_id == "SMD":
+    if data_id == "SMD-old":
         machine_number_list = [f"machine-1-{i}" for i in range(1, 9)]
         machine_number_list += [f"machine-2-{i}" for i in range(1,10)]
         machine_number_list += [f"machine-3-{i}" for i in range(1,12)]
@@ -401,6 +401,10 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
             dataset_name = "synth"
         elif data_id == "SWaT":
             dataset_name = "swat"
+        elif data_id == "MSL":
+            dataset_name = "msl"
+        elif data_id == "SMD":
+            dataset_name = "smd"
         else:
             dataset_name = data_id
         iter_result_list = []
@@ -423,7 +427,7 @@ def compute_one_strategy(data_id,strategy_name,ensemble_strategy_list,csv_writer
         for pkl_path in pkl_path_list:
             result, same_list, same_std, same_anomaly_list, same_anomaly_std = ensemble(pkl_path,data_id,ensemble_strategy_list,last_step_threshold,compute_abs,compute_sum)
             result = list(result)
-            print(f"Best F1 score: {result[0]}\nPrecision: {result[1]}\nRecall: {result[2]}")
+            print(f"Best Precision: {result[0]}\nRecall: {result[1]}\nF1 score: {result[2]}")
             iter_result_list.append(result)
             csv_writer.writerow([compute_abs,compute_sum] + result)
             csv_writer.writerow(same_list + [same_std])
