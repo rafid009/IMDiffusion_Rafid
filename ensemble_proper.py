@@ -210,10 +210,10 @@ def ensemble(pkl_path, data_id, ensemble_strategy_list = [],last_step_threshold 
 
         ))
     # threshold = residual.reshape(-1).topk(int(0.0005 * threshold * len(residual))).values[-1].item()
-    precision, recall, _ = precision_recall_curve(label, residual_list[0].reshape(-1))
+    precision, recall, _ = precision_recall_curve(label, average_residual_list[0].reshape(-1))
     pr_auc = auc(recall, precision)
     print(f"Precision-Recall AUC: {pr_auc:.4f}")
-    
+
     true = torch.ones_like(residual_list[0])
     false = torch.zeros_like(residual_list[0])
     origin_prediction = torch.zeros_like(residual_list[0])
