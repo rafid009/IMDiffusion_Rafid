@@ -31,16 +31,25 @@ test_data_path_list = []
 label_data_path_list = []
 dataset_name = ""
 if args.dataset == "SMD":
-    data_set_number = ["3-4",'3-5',"3-10","3-11","1-5","1-8","2-4"]
-    data_set_number += ["1-1","1-2","1-3","1-4","1-5","1-6","1-7","1-8"]
-    data_set_number += ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9"]
-    data_set_number += ["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10","3-11"]
+    # data_set_number = ["3-4",'3-5',"3-10","3-11","1-5","1-8","2-4"]
+    # data_set_number += ["1-1","1-2","1-3","1-4","1-5","1-6","1-7","1-8"]
+    # data_set_number += ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9"]
+    # data_set_number += ["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10","3-11"]
 
-    for data_set_id in data_set_number:
-            file = f"machine-{data_set_id}_train.pkl"
-            train_data_path_list.append("data/Machine/" + file)
-            test_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test.pkl"))
-            label_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test_label.pkl"))
+    # for data_set_id in data_set_number:
+    #         file = f"machine-{data_set_id}_train.pkl"
+    #         train_data_path_list.append("data/Machine/" + file)
+    #         test_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test.pkl"))
+    #         label_data_path_list.append("data/Machine/" + file.replace("_train.pkl","_test_label.pkl"))
+    train_data_path_list.append("data/smd/SMD_train.npy")
+    test_data_path_list.append("data/smd/SMD_test.npy")
+    label_data_path_list.append("data/smd/SMD_test_label.npy")
+    dataset_name = "smd"
+elif args.dataset == "MSL":
+    train_data_path_list.append("data/msl/MSL_train.npy")
+    test_data_path_list.append("data/msl/MSL_test.npy")
+    label_data_path_list.append("data/msl/MSL_test_label.npy")
+    dataset_name = "msl"
 elif args.dataset == "GCP":
     data_set_number = [f"service{i}" for i in range(0,30)]
     for data_set_id in data_set_number:

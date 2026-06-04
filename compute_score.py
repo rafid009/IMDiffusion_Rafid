@@ -186,6 +186,10 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
         dname = "synth"
     elif dataset_name == "SWaT":
         dname = "swat"
+    elif dataset_name == "SMD":
+        dname = "smd"
+    elif dataset_name == "MSL":
+        dname = "msl"
     else:
         dname = dataset_name
     subset_name = dname
@@ -219,6 +223,14 @@ def compute_one_subset_one_strategy(dataset_name, subset_name, compute_sum, comp
                         print("begin to load synth data ...")
                         labels = np.load("data/synth/Y_test.npy").reshape(-1)
                         ground_truth = np.load("data/synth/X_test.npy")
+                    elif dataset_name == "SMD":
+                        print("begin to load smd data ...")
+                        labels = np.load("data/smd/SMD_test_label.npy").reshape(-1)
+                        ground_truth = np.load("data/smd/SMD_test.npy")
+                    elif dataset_name == "MSL":
+                        print("begin to load msl data ...")
+                        labels = np.load("data/msl/MSL_test_label.npy").reshape(-1)
+                        ground_truth = np.load("data/msl/MSL_test.npy")
                     else:
                         labels = pickle.load(
                             open(f"data/Machine/{subset_name}_test_label.pkl", "rb")

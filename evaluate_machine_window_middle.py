@@ -47,6 +47,10 @@ if args.dataset == "SWaT":
     dataset_name = "swat"
 elif args.dataset == "Synth":
     dataset_name = "synth"
+elif args.dataset == "SMD":
+    dataset_name = "smd"
+elif args.dataset == "MSL":
+    dataset_name = "msl"
 try:
     os.mkdir(f"window_result_{dataset_name}")
 except:
@@ -86,6 +90,14 @@ for iteration in os.listdir(f"train_result_{dataset_name}"):
             train_data_path_list.append("data/synth/X_train.npy")
             test_data_path_list.append("data/synth/X_test.npy")
             label_data_path_list.append("data/synth/Y_test.npy")
+        elif args.dataset == "SMD":
+            train_data_path_list.append("data/smd/SMD_train.npy")
+            test_data_path_list.append("data/smd/SMD_test.npy")
+            label_data_path_list.append("data/smd/SMD_test_label.npy")
+        elif args.dataset == "MSL":
+            train_data_path_list.append("data/msl/MSL_train.npy")
+            test_data_path_list.append("data/msl/MSL_test.npy")
+            label_data_path_list.append("data/msl/MSL_test_label.npy")
         else:
             data_file = f"{data_id}_train.pkl"
             train_data_path_list.append("data/Machine/" + data_file)
