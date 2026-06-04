@@ -123,7 +123,7 @@ def merge(pkl_path,data_id,machine_number = ""):
     # print(f"shape of all gen is {all_gen_middle.shape}")
     all_gen_middle = torch.cat([head_middle, all_gen_middle], dim=1)
 
-    if data_id == "SMD" or data_id == "GCP":
+    if data_id == "SMD-old" or data_id == "GCP":
         print(f"machine number is {machine_number}")
         label = pickle.load(
             open(f"data/Machine/{machine_number}_test_label.pkl", "rb")
@@ -137,6 +137,12 @@ def merge(pkl_path,data_id,machine_number = ""):
     elif data_id == "SWaT":
         label = np.load("data/swat/SWaT_minute_segments_anomaly_labels.npy")
         origin_data = np.load("data/swat/SWaT_minute_segments_anomaly.npy")
+    elif data_id == "MSL":
+        label = np.load("data/msl/MSL_test_label.npy")
+        origin_data = np.load("data/msl/MSL_test.npy")
+    elif data_id == "SMD":
+        label = np.load("data/smd/SMD_test_label.npy")
+        origin_data = np.load("data/smd/SMD_test.npy")
     else:
         label = pickle.load(
             open(f"data/Machine/{data_id}_test_label.pkl", "rb")
