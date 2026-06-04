@@ -6,6 +6,7 @@ from tqdm import tqdm
 import argparse
 from pathlib import Path
 import numpy as np
+from sklearn.metrics import precision_recall_curve, auc 
 
 def prediction_adjust(prediction, labels):
     labels = labels[:len(prediction)]
@@ -193,7 +194,7 @@ def compute_residual(prediction, all_target,compute_abs=True,compute_sum=True):
 
 
 def ensemble(pkl_path, data_id, ensemble_strategy_list = [],last_step_threshold = 0.02,compute_abs=True,compute_sum=True,machine_number=""):
-    if data_id == "SMD" or data_id == "GCP":
+    if data_id == "SMD-old" or data_id == "GCP":
         all_gen_middle, label, all_target = merge(pkl_path, data_id,machine_number=machine_number)
     else:
         all_gen_middle, label, all_target = merge(pkl_path,data_id)
@@ -209,7 +210,10 @@ def ensemble(pkl_path, data_id, ensemble_strategy_list = [],last_step_threshold 
 
         ))
     # threshold = residual.reshape(-1).topk(int(0.0005 * threshold * len(residual))).values[-1].item()
-
+    precision, recall, _ = precision_recall_curve(label, residual_list[0].reshape(-1))
+    pr_auc = auc(recall, precision)
+    print(f"Precision-Recall AUC: {pr_auc:.4f}")
+    
     true = torch.ones_like(residual_list[0])
     false = torch.zeros_like(residual_list[0])
     origin_prediction = torch.zeros_like(residual_list[0])
